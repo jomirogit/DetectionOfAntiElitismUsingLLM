@@ -18,12 +18,12 @@ sys.path.insert(0, src_path_2)
 from src.bert.dataset import PBertDataset
 
 from anti_elitism_model import BaseMVLabelStrategy
-from common_methods import load_training_data
+from common_methods import load_training_true_data
 from common_methods import extract_assistant_text
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
-train_data, true_label_data = load_training_data()
+train_data, true_label_data = load_training_true_data()
 
 # System message to provide an basic role
 system_message = """<|im_start|>system

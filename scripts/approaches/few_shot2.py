@@ -19,7 +19,7 @@ sys.path.insert(0, src_path_2)
 from src.bert.dataset import PBertDataset
 
 from anti_elitism_model import BaseMVLabelStrategy
-from common_methods import load_training_data
+from common_methods import load_training_true_data
 from common_methods import extract_assistant_text
 
 # Initialize the model
@@ -84,7 +84,7 @@ def save_generated_texts(generated_texts_df):
 
 def main():
     
-    train_data, true_label_data = load_training_data()
+    train_data, true_label_data = load_training_true_data()
     generator = initialize_generator()
     sbert_model = initialize_sbert()
     generated_texts_df = generate_texts(generator, true_label_data, train_data, sbert_model)

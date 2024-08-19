@@ -17,13 +17,13 @@ sys.path.insert(0, src_path_2)
 from src.bert.dataset import PBertDataset
 
 from anti_elitism_model import BaseMVLabelStrategy
-from anti_elitism_model import load_training_data
+from anti_elitism_model import load_training_true_data
 from anti_elitism_model import extract_assistant_text()
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 # Get the train data provided by Erhard et al.,2023
-train_data, true_label_data = load_training_data()
+train_data, true_label_data = load_training_true_data()
 
 
 # system message

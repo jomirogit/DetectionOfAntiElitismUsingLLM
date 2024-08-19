@@ -40,11 +40,16 @@ def load_training_data():
         label_strategy=BaseMVLabelStrategy(),
         exclude_coders=[],
     )
+    train_data = train.df_labels[["id", "text", "vote"]]
+    train_data["elite"] = train_data["vote"]
 
-    return train
+    train_data = train_data[["id", "text", "elite"]]
+    true_label_data = train_data[train_data['elite'] == 1]
+
+    return train_data
 
 # Load the training data and return both the train_data as DataFrame and the true_label_data
-def load_training_data():
+def load_training_true_data():
     train = PBertDataset.from_disk(
         path=os.path.join(src_path, "data/labeled_data/train.csv.zip"),
         label_strategy=BaseMVLabelStrategy(),

@@ -36,6 +36,8 @@ roles_positions = [
     {"role": "Umweltminister", "position": "gruen"}
 ]
 
+train_data = load_training_data()
+
 generator = pipeline(model="LeoLM/leo-hessianai-13b-chat", device="cuda", torch_dtype=torch.float16, trust_remote_code=False)
 
 generated_texts = []

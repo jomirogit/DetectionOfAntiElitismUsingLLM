@@ -24,7 +24,7 @@ from common_methods import extract_assistant_text
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 # Load the training data from Erhard et al., 2023
-train_data, true_label_data = load_training_data()
+train_data = load_training_data()
 
 # Initialization of prompt format and the system message
 prompt_format = "<|im_start|>user\n{prompt}<|im_end|>\n<|im_start|>assistant\n"
