@@ -15,7 +15,7 @@ from src.bert.dataset import PBertDataset
 from common_methods import BaseMVLabelStrategy
 
 class AntiElitismTrainer:
-    def __init__(self, train_data, model_name="deepset/bert-large", batch_size=8, epochs=3, lr=2e-5):
+    def __init__(self, train_data, model_name="deepset/gbert-base", batch_size=8, epochs=3, lr=2e-5):
         self.DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
         self.MODEL_NAME = model_name
         self.BATCH_SIZE = batch_size
