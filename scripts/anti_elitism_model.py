@@ -27,14 +27,14 @@ class AntiElitismTrainer:
 
         # Set the test data
         test = PBertDataset.from_disk(
-            path=self.test_csv_path,
+            path=os.path.join(src_path, "data/labeled_data/test.csv.zip"),
             label_strategy=BaseMVLabelStrategy(),
             exclude_coders=[],
         )
         test_data = test.df_labels[["id", "text", "vote"]]
         test_data["elite"] = test_data["vote"]
 
-        test_data = test_data[["id", "text", "elite"]]
+        self.test_data = test_data[["id", "text", "elite"]]
         
 
 
@@ -110,5 +110,5 @@ class AntiElitismTrainer:
 
     def save_model(self, output_dir="results"):
         os.makedirs(output_dir, exist_ok=True)
-        self.model.save_pretrained(output_dir + "anti_elitism_model")
-        self.tokenizer.save_pretrained(output_dir + "anti_elitism_tokenizer")
+        self.model.save_pretrained(output_dir + "/anti_elitism_model")
+        self.tokenizer.save_pretrained(output_dir + "/anti_elitism_tokenizer")
