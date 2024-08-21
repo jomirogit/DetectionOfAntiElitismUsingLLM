@@ -1,0 +1,50 @@
+# README
+## Project Overview
+This project aims to train and evaluate a model for detecting anti-elitism. Various approaches to data augmentation and diversity measurement are employed to improve the model's performance. This documentation provides an overview of the project structure and explains the functionality of the included scripts.
+## Important Requirement
+**Note:** For this project to run correctly, the [PopBERT model](https://github.com/ErhardEtAl2023/PopBERT) by Erhard et al., 2023, must be cloned and located in a directory parallel to the `scripts` directory. The project structure should look like this:
+project_root/ │ ├── PopBERT/ # This is the cloned PopBERT repository │ └── scripts/ ├── anti_elitism_model.py ├── common_methods.py ├── evaluate.py ├── testEval8.err ├── testEval8.out ├── approaches/ ├── diversity/ └── results/
+
+
+## Directory Structure
+scripts/ │ ├── anti_elitism_model.py ├── common_methods.py ├── evaluate.py ├── testEval8.err ├── testEval8.out │ ├── approaches/ │ └── (Contains different approaches for generating additional training data) │ ├── diversity/ │ └── (Contains classes for calculating similarity scores) │ └── results/ └── (Stores the results of model evaluations)
+
+## Directory Structure
+
+### `scripts/`
+- **`anti_elitism_model.py`**: 
+  - This script is responsible for training and evaluating the anti-elitism model. It loads the data, preprocesses it, trains the model, and evaluates its performance on a test dataset. Training and test data are provided by Erhard et al., 2023.
+  
+- **`common_methods.py`**: 
+  - Contains shared methods and helper functions used by other scripts. This file includes the specified label strategy for data annotated by coders and various functions to support operations in the scripts.
+  
+- **`evaluate.py`**: 
+  - Evaluates the trained models on the test dataset, generating detailed performance reports and comparing actual labels with predicted labels.
+  
+
+### `scripts/approaches/`
+- This directory contains scripts for generating additional training data. These approaches are designed to enhance the anti-elitism model by increasing the diversity of the training data.
+  - **`chain_of_thought.py`**: Contains methods for chain-of-thought reasoning to generate training examples.
+  - **`few_shot2.py`**: Implements few-shot learning techniques for data augmentation.
+  - **`role_playing_basic.py`**: Provides basic role-playing scenarios for data generation.
+  - **`role_playing_diverse.py`**: Implements diverse role-playing scenarios to target data variety.
+  - **`topic.py`**: Contains methods for generating data based on different topics.
+
+### `scripts/diversity/`
+- This directory includes scripts for calculating diversity scores and evaluating the diversity of datasets.
+  - **`chamfer_remote_evaluation.py`**: Contains methods for Chamfer remote evaluation to measure dataset diversity.
+  - **`evaluate_diversity.py`**: Provides functions for evaluating the diversity of datasets and model performance.
+
+### `scripts/results/`
+- Stores the results of model evaluations, including various metrics and reports generated during the evaluation process.
+
+## Usage
+1. **Cloning PopBERT**: Before running any scripts, ensure that the PopBERT repository by Erhard et al., 2023, is cloned into a directory parallel to `scripts/`.
+```bash
+   git clone https://github.com/ErhardEtAl2023/PopBERT.git
+	2. Training the Model: Use anti_elitism_model.py to train the model on the provided dataset. You can adjust parameters such as the number of epochs, batch size, etc., within the script.
+	3. Model Evaluation: After training, run evaluate.py to evaluate the model on a separate test dataset. The results will be stored in the results/ directory.
+	4. Data Augmentation: Explore the approaches/ directory for different methods to generate additional training data. These methods can help improve the model's performance.
+	5. Diversity Measurement: Use the classes in the diversity/ directory to analyze the diversity of your datasets and take appropriate measures to enhance model performance.
+Contact
+For any questions or comments, feel free to contact the author.
