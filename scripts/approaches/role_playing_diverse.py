@@ -43,7 +43,7 @@ generator = pipeline(model="LeoLM/leo-hessianai-13b-chat", device="cuda", torch_
 generated_texts = []
 generated_texts_df = pd.DataFrame(columns=["text", "id", "elite"])
 
-for _ in range(100):
+for _ in range(300):
     # Generate anti-elitism statements for each role and position
     for role_position in roles_positions:
         role = role_position['role']
