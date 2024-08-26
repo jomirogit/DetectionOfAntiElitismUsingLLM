@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+
 # coding: utf-8
 
 from transformers import pipeline
@@ -46,7 +46,7 @@ def generate_chain_of_thought_statements(definition):
     response2 = generator(prompt_format.format(prompt=prompt2), do_sample=True, top_p=0.95, max_length=8192)
     instance_seeds = extract_assistant_text(response2[0])
        
-    # Step 3: Generiere Data instances on the basis of the instance seeds
+    # Step 3: Generate Data instances on the basis of the instance seeds
     prompt3 = f"Verwende den folgenden Satz, um genau eine anti-elitistische Aussage zu generieren:\n{instance_seeds}"
     response3 = generator(prompt_format.format(prompt=prompt3), do_sample=True, top_p=0.95, max_length=8192)
     data_instances = extract_assistant_text(response3[0])
@@ -62,8 +62,9 @@ def generate_chain_of_thought_statements(definition):
 # Initialize an empty DataFrame to store corrected data instances
 corrected_data_df = pd.DataFrame(columns=["text", "id", "elite"])
 
-# Open the file for writing
-with open("generated_texts_chain_ot.txt", 'w', encoding='utf-8') as file:
+# Save the generated texts to a file for qualitative analysis
+with open(os.path.join(os.path.dirname(__file__), '../generated_data/qualitative_analysis/generated_texts_cot.txt'), "w", encoding="utf-8") as file:
+    os.makedirs(os.path.dirname(file.name), exist_ok=True)
     for i in range(500):
         # Perform the steps
         contexts, instance_seeds, data_instances, corrected_data_instances = generate_chain_of_thought_statements(definition)
@@ -97,4 +98,6 @@ with open("generated_texts_chain_ot.txt", 'w', encoding='utf-8') as file:
 expanded_train_data = pd.concat([train_data, corrected_data_df], ignore_index=True)
 
 # Save the expanded DataFrame to a new CSV file for training a new model
-expanded_train_data.to_csv("expanded_train_data_chain.csv", index=False)
+output_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../generated_data'))
+output_csv_file = os.path.join(output_dir, "expanded_train_data_chain.csv")
+expanded_train_data.to_csv(output_csv_file, index=False)
