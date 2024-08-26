@@ -51,8 +51,9 @@ def generate_texts(generator, true_label_data, train_data, sbert_model, threshol
     generated_texts_df = pd.DataFrame(columns=["text", "id", "elite"])
     
     prompt_format = "<|im_start|>user\n{prompt}<|im_end|>\n<|im_start|>assistant\n"
-    
-    for i in range(n_texts):
+
+    i = 0
+    while len(generated_texts_df) < n_texts:
         # Provide four training instances as few-shot examples
         few_shot_examples = true_label_data.sample(n=4)
         formatted_examples = "\n".join(f"text: {example['text']}" for _, example in few_shot_examples.iterrows())
@@ -74,13 +75,16 @@ def generate_texts(generator, true_label_data, train_data, sbert_model, threshol
                 "elite": [1] 
             })
             generated_texts_df = pd.concat([generated_texts_df, new_data], ignore_index=True)
-    
+            i = i + 1
+            
     return generated_texts_df
 
 
 def save_generated_texts(generated_texts_df):
-    generated_texts_df.to_csv("expanded_train_data_few_shot2.csv", index=False)
-    print("3000 texts successfully generated.")
+    # Save the expanded DataFrame to a new CSV file for training a new model
+    output_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../generated_data/csv_training_data'))
+    output_csv_file = os.path.join(output_dir, "expanded_train_data_few_shot.csv")
+    generated_texts_df.to_csv(output_csv_file, index=False)
 
 def main():
     
@@ -88,7 +92,17 @@ def main():
     generator = initialize_generator()
     sbert_model = initialize_sbert()
     generated_texts_df = generate_texts(generator, true_label_data, train_data, sbert_model)
-    save_generated_texts(generated_texts_df)
+    
+    # Save the generated texts to a file for qualitative analysis
+    with open(os.path.join(os.path.dirname(__file__), '../generated_data/qualitative_analysis/generated_texts_few_shot.txt'), "w", encoding="utf-8") as f:
+        os.makedirs(os.path.dirname(f.name), exist_ok=True)
+        for _, row in generated_texts_df.iterrows():
+            f.write(row["text"] + "\n\n")
+            f.write("\n" + "="*50 + "\n\n")
+   
+    # Append the generated DataFrame to the existing DataFrame
+    expanded_train_data = pd.concat([train_data, generated_texts_df], ignore_index=True)
+    save_generated_texts(expanded_train_data)
 
 if __name__ == "__main__":
     main()

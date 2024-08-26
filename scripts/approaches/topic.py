@@ -17,8 +17,8 @@ sys.path.insert(0, src_path_2)
 from src.bert.dataset import PBertDataset
 
 from anti_elitism_model import BaseMVLabelStrategy
-from anti_elitism_model import load_training_true_data
-from anti_elitism_model import extract_assistant_text()
+from common_methods import load_training_true_data
+from common_methods import extract_assistant_text
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -34,28 +34,27 @@ prompt_format = "<|im_start|>user\n{prompt}<|im_end|>\n<|im_start|>assistant\n"
 
 # list of the different topics
 topics = [
-    "Umweltschutz und Klimapolitik",
-    "Gesundheitswesen und Krankenversicherung",
-    "Wohnungsmarkt und sozialer Wohnungsbau",
-    "Arbeitsmarkt und Arbeitsrecht",
-    "Bildungspolitik und Schulsystem",
-    "Migration und Integrationspolitik",
-    "Medienlandschaft und Pressefreiheit",
-    "Digitalisierung und Datenschutz",
-    "Rentenpolitik und Altersversorgung",
-    "Handelspolitik und internationale Abkommen",
-    "Sozialpolitik und Sozialhilfe",
-    "Steuerpolitik und Steuerreformen",
-    "Infrastrukturprojekte und Verkehrsplanung",
+    "Wirtschaftspolitik und Finanzsystem",
+    "Steuerpolitik und oeffentliche Ausgaben",
+    "Sozialpolitik und Wohlfahrtssysteme",
     "Aussenpolitik und internationale Beziehungen",
-    "Justizsystem und Rechtsreformen",
-    "Gleichstellungspolitik und Genderfragen",
-    "Energiepolitik und erneuerbare Energien",
-    "Landwirtschaft und Ernährungssicherheit",
-    "Veteranenangelegenheiten und Militaerpolitik",
-    "Kulturpolitik und kulturelle Foerderung"
+    "Nationale Verteidigung und Militaerpolitik",
+    "Digitalisierung und Datenschutzpolitik",
+    "Energiepolitik und Versorgungssicherheit",
+    "Umweltschutz und Klimapolitik",
+    "Gesundheitspolitik und Medizinische Versorgung",
+    "Bildungspolitik und Schulsystem",
+    "Arbeitspolitik und Arbeitsrecht",
+    "Wohnungspolitik und Stadtplanung",
+    "Justizpolitik und Rechtsreformen",
+    "Familienpolitik und Rentenpolitik",
+    "Kriminalitaetsbekaempfung und Rechtsstaatlichkeit",
+    "Landwirtschaftspolitik und Lebensmittelversorgung",
+    "Verkehrspolitik und Infrastrukturentwicklung",
+    "Medienpolitik und Meinungsfreiheit",
+    "Bevoelkerungs- und Einwanderungspolitik",
+    "Kultur- und Kunstpolitik"
 ]
-
 # Initialization of the generator
 generator = pipeline(model="LeoLM/leo-hessianai-13b-chat", device="cuda", torch_dtype=torch.float16, trust_remote_code=False)
 
@@ -65,7 +64,7 @@ generated_texts = []
 
 # Durchlaufen der Themenliste und Generieren der entsprechenden Aussagen
 # Loop to generate texts
-for _ in range(1000):
+for _ in range(150):
     for topic in topics:
         
         # Create a prompt for text generation
@@ -93,14 +92,19 @@ for _ in range(1000):
             # Append the new text to the main DataFrame
             generated_texts_df = pd.concat([generated_texts_df, new_data], ignore_index=True)
 
+
+# Save the generated texts to a file for qualitative analysis
+with open(os.path.join(os.path.dirname(__file__), '../generated_data/qualitative_analysis/generated_texts_role_topic.txt'), "w", encoding="utf-8") as f:
+    os.makedirs(os.path.dirname(f.name), exist_ok=True)
+    for text in generated_texts:
+        f.write(text + "\n\n")
+        f.write("\n" + "="*50 + "\n\n")
+
 # Append the generated DataFrame to the existing DataFrame
 expanded_train_data = pd.concat([train_data, generated_texts_df], ignore_index=True)
 
 # Save the expanded DataFrame to a new CSV file for training a new model
-expanded_train_data.to_csv("expanded_train_data_role_topic.csv", index=False)
+output_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../generated_data/csv_training_data'))    
+output_csv_file = os.path.join(output_dir, "expanded_train_data_role_topic.csv")
+expanded_train_data.to_csv(output_csv_file, index=False)
 
-
-# Save the generated texts to a file for qualitative analysis
-with open("generated_texts_role_topic.txt", "w", encoding="utf-8") as f:
-    for text in generated_texts:
-        f.write(text + "\n\n")

@@ -25,17 +25,26 @@ from common_methods import extract_assistant_text
 # Define the roles and positions used for role playing
 roles_positions = [
     {"role": "Kanzlerkandidat", "position": "konservativ"},
-    {"role": "Oppositionsfuehrer", "position": "liberal"},
-    {"role": "Minister fuer soziale Angelegenheiten", "position": "sozialdemokratisch"},
-    {"role": "Fraktionsvorsitzender", "position": "gruen"},
-    {"role": "Ministerpraesident", "position": "zentristisch"},
-    {"role": "Staatssekretaer", "position": "liberal"},
-    {"role": "Parlamentsabgeordneter", "position": "konservativ"},
-    {"role": "Verteidigungsminister", "position": "konservativ"},
-    {"role": "Wirtschaftsminister", "position": "wirtschaftsliberal"},
-    {"role": "Umweltminister", "position": "gruen"}
+    {"role": "Finanzminister", "position": "konservativ"},
+    {"role": "Gesundheitsminister", "position": "konservativ"},
+    {"role": "Umweltminister", "position": "gruen"},
+    {"role": "Aussenminister", "position": "liberal"},
+    {"role": "Innenminister", "position": "liberal"},
+    {"role": "Justizminister", "position": "sozialdemokratisch"},
+    {"role": "Verteidigungsminister", "position": "sozialdemokratisch"},
+    {"role": "Wirtschaftsminister", "position": "sozialdemokratisch"},
+    {"role": "Bildungsminister", "position": "zentristisch"},
+    {"role": "Arbeitsminister", "position": "zentristisch"},
+    {"role": "Familienminister", "position": "zentristisch"},
+    {"role": "Sozialminister", "position": "zentristisch"},
+    {"role": "Energieminister", "position": "zentristisch"},
+    {"role": "Landwirtschaftsminister", "position": "zentristisch"},
+    {"role": "Parteivorsitzender", "position": "sozialdemokratisch"},
+    {"role": "Generalsekretaer", "position": "konservativ"},
+    {"role": "Praesident des Bundesverbandes", "position": "liberal"},
+    {"role": "Bundespraesident", "position": "neutral"},
+    {"role": "Verfassungsrichter", "position": "neutral"}
 ]
-
 train_data = load_training_data()
 
 generator = pipeline(model="LeoLM/leo-hessianai-13b-chat", device="cuda", torch_dtype=torch.float16, trust_remote_code=False)
@@ -43,7 +52,7 @@ generator = pipeline(model="LeoLM/leo-hessianai-13b-chat", device="cuda", torch_
 generated_texts = []
 generated_texts_df = pd.DataFrame(columns=["text", "id", "elite"])
 
-for _ in range(300):
+for _ in range(150):
     # Generate anti-elitism statements for each role and position
     for role_position in roles_positions:
         role = role_position['role']
@@ -76,15 +85,19 @@ for _ in range(300):
 
 
 # Save the generated texts to a file for qualitative analysis
-with open("generated_texts_diverse_roles.txt", "w", encoding="utf-8") as f:
+with open(os.path.join(os.path.dirname(__file__), '../generated_data/qualitative_analysis/generated_texts_role_diverse.txt'), "w", encoding="utf-8") as f:
+    os.makedirs(os.path.dirname(f.name), exist_ok=True)
     for text in generated_texts:
         f.write(text + "\n\n")
+        f.write("\n" + "="*50 + "\n\n")
 
 
 # Append the generated DataFrame to the existing DataFrame
 expanded_train_data = pd.concat([train_data, generated_texts_df], ignore_index=True)
 
 # Save the expanded DataFrame to a new CSV file for training a new model
-expanded_train_data.to_csv("expanded_train_data_diverse_roles.csv", index=False)
+output_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../generated_data/csv_training_data'))    
+output_csv_file = os.path.join(output_dir, "expanded_train_data_role_diverse.csv")
+expanded_train_data.to_csv(output_csv_file, index=False)
 
 

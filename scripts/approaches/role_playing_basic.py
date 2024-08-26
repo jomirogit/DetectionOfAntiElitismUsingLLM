@@ -60,14 +60,19 @@ for i in range(3000):
 
 
 # Save the generated texts to a file for qualitative analysis
-with open("generated_texts_role_basic.txt", "w", encoding="utf-8") as f:
+with open(os.path.join(os.path.dirname(__file__), '../generated_data/qualitative_analysis/generated_texts_role_basic.txt'), "w", encoding="utf-8") as f:
+    os.makedirs(os.path.dirname(f.name), exist_ok=True)
     for text in generated_texts:
         f.write(text + "\n\n")
+        f.write("\n" + "="*50 + "\n\n")
 
 
 # Append the generated DataFrame to the existing DataFrame
 expanded_train_data = pd.concat([train_data, generated_texts_df], ignore_index=True)
 
 # Save the expanded DataFrame to a new CSV file for training a new model
-expanded_train_data.to_csv("expanded_train_data_role_basic.csv", index=False)
+output_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../generated_data/csv_training_data'))
+output_csv_file = os.path.join(output_dir, "expanded_train_data_role_basic.csv")
+expanded_train_data.to_csv(output_csv_file, index=False)
+
 
