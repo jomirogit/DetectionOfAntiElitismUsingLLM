@@ -22,9 +22,32 @@ import pandas as pd
 if __name__ == "__main__":
     
     print("Baseline: Diversity of training data set without additional training examples")
+    train_data = load_training_data()
+    train_data.to_csv("train_baseline.csv", index=False)
 
-    train_data, true_labeled_data = load_training_data()
-    train_data.to_csv("train.csv", index=False)
+    analyzer_baseline = SimilarityScore("train_baseline.csv")
+    analyzer_baseline.analyze()
 
-    analyzer = SimilarityScore("train.csv")
-    analyzer.analyze()
+    print("\n" + "="*50 + "\n")
+
+    print("Few Shot Data")
+    analyzer_few_shot = SimilarityScore("expanded_train_data_few_shot2.csv")
+    analyzer_few_shot.analyze()
+
+    print("\n" + "="*50 + "\n")
+    
+    print("Similarity Scores for Chain-Of-Thought Data:")
+    analyzer_cot = SimilarityScore("expanded_train_data_role_basic.csv")
+    analyzer_cot.analyze()
+    
+    print("\n" + "="*50 + "\n")
+    
+    print("Similarity Scores for Role Playing: Basic Data:")
+    analyzer_role_basic = SimilarityScore("expanded_train_data_role_basic.csv")
+    analyzer_role_basic.analyze()
+    
+    print("\n" + "="*50 + "\n")
+    
+    print("Similarity Scores for Role Playing: Diverse Roles Data:")
+    analyzer_role_diverse = SimilarityScore("expanded_train_data_diverse_roles.csv")
+    analyzer_role_diverse.analyze()
