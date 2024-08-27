@@ -5,23 +5,24 @@ This project aims to train and evaluate a model for detecting anti-elitism. Vari
 **Note:** For this project to run correctly, the [PopBERT model](https://github.com/ErhardEtAl2023/PopBERT) by Erhard et al., 2023, must be cloned and located in a directory parallel to the `scripts` directory. The project structure should look like this:
 ```
 project_root/
-├── PopBERT/                  # This is the cloned PopBERT repository
+├── PopBERT/                  # Cloned PopBERT repository
 └── scripts/
     ├── anti_elitism_model.py
     ├── common_methods.py
     ├── evaluate.py
-    ├── testEval8.err
-    ├── testEval8.out
     ├── approaches/           # Contains different approaches for generating additional training data
     │   ├── chain_of_thought.py
-    │   ├── few_shot2.py
+    │   ├── few_shot.py
     │   ├── role_playing_basic.py
     │   ├── role_playing_diverse.py
     │   └── topic.py
     ├── diversity/            # Contains classes for calculating similarity scores
     │   ├── chamfer_remote_evaluation.py
     │   └── evaluate_diversity.py
-    └── results/              # Stores the results of model evaluations
+    ├── results/              # Directory for storing evaluation results
+    └── generated_data/       # Directory for storing generated training and analysis data
+        ├── csv_training_data/    
+        └── qualitative_analysis/ 
 ```
 
 
