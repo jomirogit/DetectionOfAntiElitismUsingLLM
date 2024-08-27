@@ -31,30 +31,34 @@ project_root/
 
 ### `scripts/`
 - **`anti_elitism_model.py`**: 
-  - This script is responsible for training and evaluating the anti-elitism model. It loads the data, preprocesses it, trains the model, and evaluates its performance on a test dataset. Training and test data are provided by Erhard et al., 2023.
+  - This script is responsible for training and evaluating the anti-elitism model. It loads the data, preprocesses it, trains the model, and evaluates its performance on a test dataset. Training and test data are provided by Erhard et al. (2023).
   
 - **`common_methods.py`**: 
   - Contains shared methods and helper functions used by other scripts. This file includes the specified label strategy for data annotated by coders and various functions to support operations in the scripts.
   
 - **`evaluate.py`**: 
   - Evaluates the trained models on the test dataset, generating detailed performance reports and comparing actual labels with predicted labels.
-  
 
 ### `scripts/approaches/`
 - This directory contains scripts for generating additional training data. These approaches are designed to enhance the anti-elitism model by increasing the diversity of the training data.
-  - **`chain_of_thought.py`**: Contains methods for chain-of-thought reasoning to generate training examples.
-  - **`few_shot2.py`**: Implements few-shot learning techniques for data augmentation.
-  - **`role_playing_basic.py`**: Provides basic role-playing scenarios for data generation.
+  - **`chain_of_thought.py`**: Implements methods for chain-of-thought reasoning to generate training examples.
+  - **`few_shot.py`**: Implements few-shot learning techniques for data augmentation.
+  - **`role_playing_basic.py`**: Provides a basic role-playing scenarios for data generation.
   - **`role_playing_diverse.py`**: Implements diverse role-playing scenarios to target data variety.
   - **`topic.py`**: Contains methods for generating data based on different topics.
 
 ### `scripts/diversity/`
 - This directory includes scripts for calculating diversity scores and evaluating the diversity of datasets.
-  - **`chamfer_remote_evaluation.py`**: Contains methods for Chamfer remote evaluation to measure dataset diversity.
-  - **`evaluate_diversity.py`**: Provides functions for evaluating the diversity of datasets and model performance.
+  - **`chamfer_remote_evaluation.py`**: Implements methods for Chamfer Distance and the Remote Clique Score to measure dataset diversity.
+  - **`evaluate_diversity.py`**: Provides functions for evaluating the diversity of datasets.
 
 ### `scripts/results/`
 - Stores the results of model evaluations, including various metrics and reports generated during the evaluation process.
+
+### `scripts/generated_data/`
+- Contains generated data used for training and analysis.
+  - **`csv_training_data/`**: Stores CSV files with generated training data.
+  - **`qualitative_analysis/`**: Contains files for qualitative analysis related to the model's performance.
 
 ## Usage
 
