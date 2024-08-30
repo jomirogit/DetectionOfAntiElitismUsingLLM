@@ -68,20 +68,14 @@ project_root/
    git clone https://github.com/ErhardEtAl2023/PopBERT.git
    ```
 
-2. **Training the Model**: Use the script `anti_elitism_model.py` to train the model on the provided dataset. You can adjust parameters such as the number of epochs, batch size, etc., within the script.
+2. **Data Augmentation**: Explore the `approaches/` directory for different methods to generate additional training data. If you execute these approaches, the data is loaded to be evaluated.
 
-   ```bash
-   python scripts/anti_elitism_model.py
-   ```
-
-3. **Model Evaluation**: After training, run the script `evaluate.py` to evaluate the model on a separate test dataset. The results will be stored in the `results/` directory.
+3. **Model Training and Evaluation**: After the augmentation, run the script `evaluate.py` to evaluate the model on a separate test dataset. The results will be stored in the `results/` directory.
 
    ```bash
    python scripts/evaluate.py
    ```
 
-4. **Data Augmentation**: Explore the `approaches/` directory for different methods to generate additional training data. These methods can help improve the model's performance.
-
-5. **Diversity Measurement**: Use the classes in the `diversity/` directory to analyze the diversity of your datasets and take appropriate measures to enhance model performance.
+4. **Diversity Measurement**: Use the classes in the `diversity/` directory to analyze the diversity of the datasets.
 
 
