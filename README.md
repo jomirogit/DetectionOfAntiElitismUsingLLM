@@ -65,7 +65,7 @@ project_root/
 1. **Cloning PopBERT**: Before running any scripts, ensure that the PopBERT repository by Erhard et al., 2023, is cloned into a directory parallel to the `scripts/` directory.
 
    ```bash
-   git clone https://github.com/ErhardEtAl2023/PopBERT.git
+   git clone https://github.com/luerhard/PopBERT
    ```
 
 2. **Data Augmentation**: Explore the `approaches/` directory for different methods to generate additional training data. If you execute these approaches, the data is loaded to be evaluated.
