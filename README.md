@@ -2,7 +2,7 @@
 ## Project Overview
 This project aims to train and evaluate a model for detecting anti-elitism. Various approaches to data augmentation and diversity measurement are employed to improve the model's performance. This documentation provides an overview of the project structure and explains the functionality of the included scripts.
 ## Important Requirement
-**Note:** For this project to run correctly, the [PopBERT model](https://github.com/ErhardEtAl2023/PopBERT) by Erhard et al., 2023, must be cloned and located in a directory parallel to the `scripts` directory. The project structure should look like this:
+**Note:** For this project to run correctly, the [PopBERT model](https://github.com/luerhard/PopBERT) by Erhard et al.,2023, must be cloned and located in a directory parallel to the `scripts` directory. The project structure should look like this:
 ```
 project_root/
 ├── PopBERT/                  # Cloned PopBERT repository
@@ -31,7 +31,7 @@ project_root/
 
 ### `scripts/`
 - **`anti_elitism_model.py`**: 
-  - This script is responsible for training and evaluating the anti-elitism model. It loads the data, preprocesses it, trains the model, and evaluates its performance on a test dataset. Training and test data are provided by Erhard et al. (2023).
+  - This script is responsible for training and evaluating the anti-elitism model. It loads the data, preprocesses it, trains the model, and evaluates its performance on a test dataset. Training and test data are provided by Erhard et al.,2023.
   
 - **`common_methods.py`**: 
   - Contains shared methods and helper functions used by other scripts. This file includes the specified label strategy for data annotated by coders and various functions to support operations in the scripts.
