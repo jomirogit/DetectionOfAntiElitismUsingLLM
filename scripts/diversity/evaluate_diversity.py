@@ -31,23 +31,29 @@ if __name__ == "__main__":
     print("\n" + "="*50 + "\n")
 
     print("Few Shot Data")
-    analyzer_few_shot = SimilarityScore("expanded_train_data_few_shot2.csv")
+    analyzer_few_shot = SimilarityScore("../generated_data/csv_training_data/expanded_train_data_few_shot.csv")
     analyzer_few_shot.analyze()
 
     print("\n" + "="*50 + "\n")
     
     print("Similarity Scores for Chain-Of-Thought Data:")
-    analyzer_cot = SimilarityScore("expanded_train_data_role_basic.csv")
+    analyzer_cot = SimilarityScore("../generated_data/csv_training_data/expanded_train_data_chain.csv")
     analyzer_cot.analyze()
     
     print("\n" + "="*50 + "\n")
     
     print("Similarity Scores for Role Playing: Basic Data:")
-    analyzer_role_basic = SimilarityScore("expanded_train_data_role_basic.csv")
+    analyzer_role_basic = SimilarityScore("../generated_data/csv_training_data/expanded_train_data_role_basic.csv")
     analyzer_role_basic.analyze()
     
     print("\n" + "="*50 + "\n")
     
     print("Similarity Scores for Role Playing: Diverse Roles Data:")
-    analyzer_role_diverse = SimilarityScore("expanded_train_data_diverse_roles.csv")
+    analyzer_role_diverse = SimilarityScore("../generated_data/csv_training_data/expanded_train_data_role_diverse.csv")
+    analyzer_role_diverse.analyze()
+    
+    print("\n" + "="*50 + "\n")
+    
+    print("Similarity Scores for Topic Approach")
+    analyzer_role_diverse = SimilarityScore("../generated_data/csv_training_data/expanded_train_data_role_topic.csv")
     analyzer_role_diverse.analyze()
