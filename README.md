@@ -1,6 +1,6 @@
 # README
 ## Project Overview
-This project aims to train and evaluate a model for detecting anti-elitism. Various approaches to data augmentation and diversity measurement are employed to improve the model's performance. This documentation provides an overview of the project structure and explains the functionality of the included scripts.
+This project aims to train and evaluate a model for detecting anti-elitism. Various approaches to data augmentation and diversity measurement are employed to explore the model's performance. This documentation provides an overview of the project structure and explains the functionality of the included scripts.
 ## Important Requirement
 **Note:** For this project to run correctly, the [PopBERT model](https://github.com/luerhard/PopBERT) by Erhard et al.,2023, must be cloned and located in a directory parallel to the `scripts` directory. The project structure should look like this:
 ```
