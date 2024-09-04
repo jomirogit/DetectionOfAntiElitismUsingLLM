@@ -10,16 +10,16 @@ project_root/
     ├── anti_elitism_model.py
     ├── common_methods.py
     ├── evaluate.py
-    ├── approaches/           # Contains different approaches for generating additional training data
+    ├── approaches/           # Contains the different approaches for generating additional training data
     │   ├── chain_of_thought.py
     │   ├── few_shot.py
     │   ├── role_playing_basic.py
     │   ├── role_playing_diverse.py
     │   └── topic.py
-    ├── diversity/            # Contains classes for calculating similarity scores
+    ├── diversity/            # Contains classes for calculating the similarity scores
     │   ├── chamfer_remote_evaluation.py
     │   └── evaluate_diversity.py
-    ├── results/              # Directory for storing evaluation results
+    ├── results/              # Directory for storing evaluation results including the comparison of the predicted labels and the gold labels
     └── generated_data/       # Directory for storing generated training and analysis data
         ├── csv_training_data/    
         └── qualitative_analysis/ 
@@ -31,19 +31,19 @@ project_root/
 
 ### `scripts/`
 - **`anti_elitism_model.py`**: 
-  - This script is responsible for training and evaluating the anti-elitism model. It loads the data, preprocesses it, trains the model, and evaluates its performance on a test dataset. Training and test data are provided by Erhard et al.,2023.
+  - This script is responsible for training and evaluating the anti-elitism model. It loads the data, preprocesses it, trains the model, and evaluates its performance on the test dataset. Training and test data are provided by Erhard et al.,2023.
   
 - **`common_methods.py`**: 
-  - Contains shared methods and helper functions used by other scripts. This file includes the specified label strategy for data annotated by coders and various functions to support operations in the scripts.
+  - Contains shared methods and helper functions used by other scripts. This file includes the specified Majority Vote Label Strategy for data annotated by coders and various functions to support operations in the scripts.
   
 - **`evaluate.py`**: 
-  - Evaluates the trained models on the test dataset, generating detailed performance reports and comparing actual labels with predicted labels.
+  - Evaluates the trained models on the test dataset, generating detailed performance reports and showing an overview of the comparison of actual labels with predicted labels.
 
 ### `scripts/approaches/`
 - This directory contains scripts for generating additional training data. These approaches are designed to enhance the anti-elitism model by increasing the diversity of the training data.
-  - **`chain_of_thought.py`**: Implements methods for chain-of-thought reasoning to generate training examples.
-  - **`few_shot.py`**: Implements few-shot learning techniques for data augmentation.
-  - **`role_playing_basic.py`**: Provides a basic role-playing scenarios for data generation.
+  - **`chain_of_thought.py`**: Implements a multi-step prompting strategy to generate training examples.
+  - **`few_shot.py`**: Implements a few-shot learning technique for data augmentation.
+  - **`role_playing_basic.py`**: Provides a basic role-playing scenario for data generation.
   - **`role_playing_diverse.py`**: Implements diverse role-playing scenarios to target data variety.
   - **`topic.py`**: Contains methods for generating data based on different topics.
 
@@ -57,8 +57,8 @@ project_root/
 
 ### `scripts/generated_data/`
 - Contains generated data used for training and analysis.
-  - **`csv_training_data/`**: Stores CSV files with generated training data.
-  - **`qualitative_analysis/`**: Contains files for qualitative analysis related to the model's performance.
+  - **`csv_training_data/`**: Stores CSV files with generated training data serving as input for evaluation and training.
+  - **`qualitative_analysis/`**: Contains files for qualitative analysis related to the model's performance to enable the manual inspection with the assessment template.
 
 ## Usage
 
