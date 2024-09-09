@@ -44,7 +44,6 @@ def load_training_data():
     train_data["elite"] = train_data["vote"]
 
     train_data = train_data[["id", "text", "elite"]]
-    true_label_data = train_data[train_data['elite'] == 1]
 
     return train_data
 
@@ -62,6 +61,21 @@ def load_training_true_data():
     true_label_data = train_data[train_data['elite'] == 1]
 
     return train_data, true_label_data
+
+# Load the training data and return the false_label_data
+def load_training_false_data():
+    train = PBertDataset.from_disk(
+        path=os.path.join(src_path, "data/labeled_data/train.csv.zip"),
+        label_strategy=BaseMVLabelStrategy(),
+        exclude_coders=[]
+    )
+    train_data = train.df_labels[["id", "text", "vote"]]
+    train_data["elite"] = train_data["vote"]
+
+    train_data = train_data[["id", "text", "elite"]]
+    false_label_data = train_data[train_data['elite'] == 0]
+
+    return false_label_data
 
 
 # Extract the generated assistant text
