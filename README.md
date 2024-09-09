@@ -11,7 +11,7 @@ project_root/
     ├── common_methods.py
     ├── evaluate.py
     ├── approaches/           # Contains the different approaches for generating additional training data
-    │   ├── chain_of_thought.py
+    │   ├── multi_step_prompting.py
     │   ├── few_shot.py
     │   ├── role_playing_basic.py
     │   ├── role_playing_diverse.py
@@ -41,8 +41,9 @@ project_root/
 
 ### `scripts/approaches/`
 - This directory contains scripts for generating additional training data. These approaches are designed to enhance the anti-elitism model by increasing the diversity of the training data.
-  - **`chain_of_thought.py`**: Implements a multi-step prompting strategy to generate training examples.
+  - **`multi_step_prompting.py`**: Implements a multi-step prompting strategy to generate training examples.
   - **`few_shot.py`**: Implements a few-shot learning technique for data augmentation.
+  - **'few_shot_balanced.py'**: Implements the few-shot learning technique with generating additional examples according a proportional label distribution
   - **`role_playing_basic.py`**: Provides a basic role-playing scenario for data generation.
   - **`role_playing_diverse.py`**: Implements diverse role-playing scenarios to target data variety.
   - **`topic.py`**: Contains methods for generating data based on different topics.
@@ -53,7 +54,7 @@ project_root/
   - **`evaluate_diversity.py`**: Provides functions for evaluating the diversity of datasets.
 
 ### `scripts/results/`
-- Stores the results of model evaluations, including various metrics and reports generated during the evaluation process.
+- Stores the saved model and a comparison of the gold labels vs the predicted labels
 
 ### `scripts/generated_data/`
 - Contains generated data used for training and analysis.
