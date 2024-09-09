@@ -13,6 +13,7 @@ project_root/
     ├── approaches/           # Contains the different approaches for generating additional training data
     │   ├── multi_step_prompting.py
     │   ├── few_shot.py
+    |   |── few_shot_balanced.py
     │   ├── role_playing_basic.py
     │   ├── role_playing_diverse.py
     │   └── topic.py
