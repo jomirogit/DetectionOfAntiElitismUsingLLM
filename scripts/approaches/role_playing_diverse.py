@@ -70,7 +70,7 @@ for _ in range(150):
         prompt_format = "<|im_start|>system\n{system_message}<|im_end|>\n<|im_start|>user\n{prompt}<|im_end|>\n<|im_start|>assistant\n"
         
         # Generate response
-        response = generator(prompt_format.format(prompt=prompt, system_message=system_message), do_sample=True, top_p=0.95, max_length=2000)
+        response = generator(prompt_format.format(prompt=prompt, system_message=system_message), do_sample=True, top_p=0.95, max_length=3000)
         assistant_text = extract_assistant_text(response[0])
         
         if assistant_text:

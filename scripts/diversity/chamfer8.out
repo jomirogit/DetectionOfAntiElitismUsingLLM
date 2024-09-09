@@ -1,0 +1,48 @@
+Baseline: Diversity of training data set without additional training examples
+Remote Clique Score: 1.3967
+Chamfer Distance Score: 1.2065
+
+==================================================
+
+Few Shot Data
+Remote Clique Score: 1.3923
+Chamfer Distance Score: 1.1775
+
+==================================================
+
+Similarity Scores for Chain-Of-Thought Data:
+Remote Clique Score: 1.3964
+Chamfer Distance Score: 1.1744
+
+==================================================
+
+Similarity Scores for Role Playing: Basic Data:
+Remote Clique Score: 1.3911
+Chamfer Distance Score: 1.1584
+
+==================================================
+
+Similarity Scores for Role Playing: Diverse Roles Data:
+Remote Clique Score: 1.3916
+Chamfer Distance Score: 1.1799
+
+==================================================
+
+Similarity Scores for Topic Approach
+Remote Clique Score: 1.3908
+Chamfer Distance Score: 1.1878
+
+============================= JOB FEEDBACK =============================
+
+NodeName=uc2n510
+Job ID: 24120825
+Cluster: uc2
+User/Group: ma_jorohr/ma_ma
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 10
+CPU Utilized: 03:15:33
+CPU Efficiency: 9.82% of 1-09:11:20 core-walltime
+Job Wall-clock time: 03:19:08
+Memory Utilized: 6.38 GB
+Memory Efficiency: 4.98% of 128.00 GB

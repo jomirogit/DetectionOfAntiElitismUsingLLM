@@ -1,10 +1,11 @@
 
 import torch
+import numpy as np
+import random
 from transformers import BertTokenizer, BertForSequenceClassification, AdamW, get_scheduler
 from torch.optim.lr_scheduler import CosineAnnealingLR
 from sklearn.metrics import classification_report
 import pandas as pd
-
 import sys
 import os
 
@@ -16,7 +17,10 @@ from src.bert.dataset import PBertDataset
 from common_methods import BaseMVLabelStrategy
 
 class AntiElitismTrainer:
-    def __init__(self, train_data, model_name="deepset/gbert-base", batch_size=8, epochs=3, lr=0.000009, weight_decay=0.01):
+    def __init__(self, train_data, model_name="deepset/gbert-base", batch_size=8, epochs=3, lr=0.000009, weight_decay=0.01, random_seed=42):
+        # Set the random seed for reproducibility
+        self.set_seed(random_seed)
+
         self.DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
         self.MODEL_NAME = model_name
         self.BATCH_SIZE = batch_size
@@ -37,8 +41,6 @@ class AntiElitismTrainer:
         test_data["elite"] = test_data["vote"]
 
         self.test_data = test_data[["id", "text", "elite"]]
-        
-
 
         # Initialize tokenizer and model
         self.tokenizer = BertTokenizer.from_pretrained(self.MODEL_NAME)
@@ -50,6 +52,15 @@ class AntiElitismTrainer:
             T_max=20,
             eta_min=self.lr / 10,
         )
+
+    def set_seed(self, seed):
+        """Set the random seed for reproducibility."""
+        torch.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed)
+        np.random.seed(seed)
+        random.seed(seed)
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
 
     def tokenize_data(self, data):
         texts = data["text"].tolist()
@@ -120,7 +131,7 @@ class AntiElitismTrainer:
         })
 
         # Save the DataFrame to a CSV file or print it
-        results_df.to_csv("test_results" + approach + ".csv", index=False)
+        results_df.to_csv("results/test_results" + approach + ".csv", index=False)
         print(results_df)
 
     def save_model(self, output_dir="results"):

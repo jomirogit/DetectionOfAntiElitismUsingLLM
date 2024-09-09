@@ -45,7 +45,7 @@ for i in range(3000):
 
     prompt = "Taetige eine anti-elitistische Aussage."
 
-    response = generator(prompt_format.format(system_message=system_message, prompt=prompt), do_sample=True, top_p=0.95, max_length=200)
+    response = generator(prompt_format.format(system_message=system_message, prompt=prompt), do_sample=True, top_p=0.95, max_length=3000)
     assistant_text = extract_assistant_text(response[0])
     if assistant_text:
         generated_texts.append(assistant_text)

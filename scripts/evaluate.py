@@ -17,7 +17,7 @@ def main():
     few_shot_data = pd.read_csv("generated_data/csv_training_data/expanded_train_data_few_shot.csv")
     trainer_few_shot = AntiElitismTrainer(few_shot_data)
     trainer_few_shot.train_model()
-    trainer_few_shot.evaluate_model("_few_shot")
+    trainer_few_shot.evaluate_model("_few_shot2")
 
     print("\n" + "="*50 + "\n")
 
@@ -30,10 +30,10 @@ def main():
     print("\n" + "="*50 + "\n")
 
     print("Topic Approach:")
-    #role_topic_data = pd.read_csv("generated_data/csv_training_data/expanded_train_data_role_topic.csv")
-    #trainer_role_topic = AntiElitismTrainer(role_topic_data)
-    #trainer_role_topic.train_model()
-    #trainer_role_topic.evaluate_model("_role_topic")
+    role_topic_data = pd.read_csv("generated_data/csv_training_data/expanded_train_data_role_topic.csv")
+    trainer_role_topic = AntiElitismTrainer(role_topic_data)
+    trainer_role_topic.train_model()
+    trainer_role_topic.evaluate_model("_role_topic")
 
     print("\n" + "="*50 + "\n")
 

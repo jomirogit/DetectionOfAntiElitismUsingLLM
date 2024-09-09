@@ -73,7 +73,7 @@ for _ in range(150):
         # Generate a response
         response = generator(
             prompt_format.format(system_message=system_message, prompt=prompt),
-            do_sample=True, top_p=0.95, max_length=2000
+            do_sample=True, top_p=0.95, max_length=3000
         )
         
         # Extract the generated text

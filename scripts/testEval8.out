@@ -1,0 +1,235 @@
+Overall dataset information
+Distribution of the labels in the test set:
+elite
+0    5974
+1    1062
+Name: count, dtype: int64
+Durchschnittliche Textlaenge: 158.72 Zeichen
+
+==================================================
+
+Baseline: Training data provided by Erhard et al.,2023 without additional training examples:
+Epoch 1 completed. Loss: 0.26832816004753113
+Epoch 2 completed. Loss: 0.3347189128398895
+Epoch 3 completed. Loss: 0.008710181340575218
+                  precision    recall  f1-score   support
+
+not anti-elitism       0.94      0.86      0.90      1481
+    anti-elitism       0.50      0.71      0.58       278
+
+        accuracy                           0.84      1759
+       macro avg       0.72      0.79      0.74      1759
+    weighted avg       0.87      0.84      0.85      1759
+
+      predicted_label  ...                                               text
+0                   0  ...               Es ist eine Schande, muss ich sagen.
+1                   0  ...  Wie beim Atomausstieg oder bei der massenhafte...
+2                   1  ...  Dafür machen Sie eine Energiewende, und dafür ...
+3                   1  ...  Schwerwiegender sind landespolitische Entschei...
+4                   0  ...  Sie wollen, dass die Bundeswehr im Indopazifik...
+...               ...  ...                                                ...
+1754                0  ...  Aber alle Strafverteidiger sagen, dass Ihr Vor...
+1755                0  ...  Die Geringverdiener müssen dann mit erhöhten B...
+1756                0  ...  So kann durch die Vergasung von Biomasse sogen...
+1757                0  ...  Vor allem schaffen wir ab 2021 den Soli ab, ab...
+1758                1  ...  Im Gegensatz zu den meisten Regierungen dieser...
+
+[1759 rows x 3 columns]
+
+==================================================
+
+Few-Shot approach:
+Augmented only with data labeled as true for anti-elitism and maximum token length 1000
+Epoch 1 completed. Loss: 0.001084997784346342
+Epoch 2 completed. Loss: 0.004506368190050125
+Epoch 3 completed. Loss: 0.004123512655496597
+                  precision    recall  f1-score   support
+
+not anti-elitism       1.00      0.14      0.24      1481
+    anti-elitism       0.18      1.00      0.30       278
+
+        accuracy                           0.27      1759
+       macro avg       0.59      0.57      0.27      1759
+    weighted avg       0.87      0.27      0.25      1759
+
+      predicted_label  ...                                               text
+0                   1  ...               Es ist eine Schande, muss ich sagen.
+1                   1  ...  Wie beim Atomausstieg oder bei der massenhafte...
+2                   1  ...  Dafür machen Sie eine Energiewende, und dafür ...
+3                   1  ...  Schwerwiegender sind landespolitische Entschei...
+4                   1  ...  Sie wollen, dass die Bundeswehr im Indopazifik...
+...               ...  ...                                                ...
+1754                1  ...  Aber alle Strafverteidiger sagen, dass Ihr Vor...
+1755                1  ...  Die Geringverdiener müssen dann mit erhöhten B...
+1756                0  ...  So kann durch die Vergasung von Biomasse sogen...
+1757                1  ...  Vor allem schaffen wir ab 2021 den Soli ab, ab...
+1758                1  ...  Im Gegensatz zu den meisten Regierungen dieser...
+
+[1759 rows x 3 columns]
+Augmented with data labeled as true for anti-elitism and labeled as false for anti-eltisim
+Epoch 1 completed. Loss: 0.0028080998454242945
+Epoch 2 completed. Loss: 0.011126208119094372
+Epoch 3 completed. Loss: 0.0014385380782186985
+                  precision    recall  f1-score   support
+
+not anti-elitism       0.85      1.00      0.92      1481
+    anti-elitism       0.91      0.04      0.07       278
+
+        accuracy                           0.85      1759
+       macro avg       0.88      0.52      0.49      1759
+    weighted avg       0.86      0.85      0.78      1759
+
+      predicted_label  ...                                               text
+0                   0  ...               Es ist eine Schande, muss ich sagen.
+1                   0  ...  Wie beim Atomausstieg oder bei der massenhafte...
+2                   0  ...  Dafür machen Sie eine Energiewende, und dafür ...
+3                   0  ...  Schwerwiegender sind landespolitische Entschei...
+4                   0  ...  Sie wollen, dass die Bundeswehr im Indopazifik...
+...               ...  ...                                                ...
+1754                0  ...  Aber alle Strafverteidiger sagen, dass Ihr Vor...
+1755                0  ...  Die Geringverdiener müssen dann mit erhöhten B...
+1756                0  ...  So kann durch die Vergasung von Biomasse sogen...
+1757                0  ...  Vor allem schaffen wir ab 2021 den Soli ab, ab...
+1758                0  ...  Im Gegensatz zu den meisten Regierungen dieser...
+
+[1759 rows x 3 columns]
+
+==================================================
+
+Chain-Of-thought:
+Augmented only with data labeled as true for anti-elitism and maximum token length 1000
+Epoch 1 completed. Loss: 0.0014660160522907972
+Epoch 2 completed. Loss: 0.004459768068045378
+Epoch 3 completed. Loss: 0.0014441169332712889
+                  precision    recall  f1-score   support
+
+not anti-elitism       1.00      0.01      0.03      1481
+    anti-elitism       0.16      1.00      0.28       278
+
+        accuracy                           0.17      1759
+       macro avg       0.58      0.51      0.15      1759
+    weighted avg       0.87      0.17      0.07      1759
+
+      predicted_label  ...                                               text
+0                   1  ...               Es ist eine Schande, muss ich sagen.
+1                   1  ...  Wie beim Atomausstieg oder bei der massenhafte...
+2                   1  ...  Dafür machen Sie eine Energiewende, und dafür ...
+3                   1  ...  Schwerwiegender sind landespolitische Entschei...
+4                   1  ...  Sie wollen, dass die Bundeswehr im Indopazifik...
+...               ...  ...                                                ...
+1754                1  ...  Aber alle Strafverteidiger sagen, dass Ihr Vor...
+1755                1  ...  Die Geringverdiener müssen dann mit erhöhten B...
+1756                1  ...  So kann durch die Vergasung von Biomasse sogen...
+1757                1  ...  Vor allem schaffen wir ab 2021 den Soli ab, ab...
+1758                1  ...  Im Gegensatz zu den meisten Regierungen dieser...
+
+[1759 rows x 3 columns]
+
+==================================================
+
+Topic Approach:
+Augmented only with data labeled as true for anti-elitism and maximum token length 1000
+Epoch 1 completed. Loss: 0.0013265337329357862
+Epoch 2 completed. Loss: 0.004366015084087849
+Epoch 3 completed. Loss: 0.005500372499227524
+                  precision    recall  f1-score   support
+
+not anti-elitism       1.00      0.12      0.22      1481
+    anti-elitism       0.18      1.00      0.30       278
+
+        accuracy                           0.26      1759
+       macro avg       0.59      0.56      0.26      1759
+    weighted avg       0.87      0.26      0.23      1759
+
+      predicted_label  ...                                               text
+0                   1  ...               Es ist eine Schande, muss ich sagen.
+1                   1  ...  Wie beim Atomausstieg oder bei der massenhafte...
+2                   1  ...  Dafür machen Sie eine Energiewende, und dafür ...
+3                   1  ...  Schwerwiegender sind landespolitische Entschei...
+4                   1  ...  Sie wollen, dass die Bundeswehr im Indopazifik...
+...               ...  ...                                                ...
+1754                1  ...  Aber alle Strafverteidiger sagen, dass Ihr Vor...
+1755                1  ...  Die Geringverdiener müssen dann mit erhöhten B...
+1756                1  ...  So kann durch die Vergasung von Biomasse sogen...
+1757                1  ...  Vor allem schaffen wir ab 2021 den Soli ab, ab...
+1758                1  ...  Im Gegensatz zu den meisten Regierungen dieser...
+
+[1759 rows x 3 columns]
+
+==================================================
+
+Role Playing: Basic
+Augmented only with data labeled as true for anti-elitism and maximum token length 1000
+Epoch 1 completed. Loss: 0.0015533828409388661
+Epoch 2 completed. Loss: 0.005158921238034964
+Epoch 3 completed. Loss: 0.005870381835848093
+                  precision    recall  f1-score   support
+
+not anti-elitism       1.00      0.06      0.11      1481
+    anti-elitism       0.17      1.00      0.29       278
+
+        accuracy                           0.21      1759
+       macro avg       0.58      0.53      0.20      1759
+    weighted avg       0.87      0.21      0.14      1759
+
+      predicted_label  ...                                               text
+0                   1  ...               Es ist eine Schande, muss ich sagen.
+1                   1  ...  Wie beim Atomausstieg oder bei der massenhafte...
+2                   1  ...  Dafür machen Sie eine Energiewende, und dafür ...
+3                   1  ...  Schwerwiegender sind landespolitische Entschei...
+4                   1  ...  Sie wollen, dass die Bundeswehr im Indopazifik...
+...               ...  ...                                                ...
+1754                1  ...  Aber alle Strafverteidiger sagen, dass Ihr Vor...
+1755                1  ...  Die Geringverdiener müssen dann mit erhöhten B...
+1756                0  ...  So kann durch die Vergasung von Biomasse sogen...
+1757                1  ...  Vor allem schaffen wir ab 2021 den Soli ab, ab...
+1758                1  ...  Im Gegensatz zu den meisten Regierungen dieser...
+
+[1759 rows x 3 columns]
+
+==================================================
+
+Role Playing: more diverse roles
+Augmented only with data labeled as true for anti-elitism and maximum token length 1000
+Epoch 1 completed. Loss: 0.0013581998646259308
+Epoch 2 completed. Loss: 0.00558871915563941
+Epoch 3 completed. Loss: 0.003528323955833912
+                  precision    recall  f1-score   support
+
+not anti-elitism       1.00      0.04      0.07      1481
+    anti-elitism       0.16      1.00      0.28       278
+
+        accuracy                           0.19      1759
+       macro avg       0.58      0.52      0.17      1759
+    weighted avg       0.87      0.19      0.10      1759
+
+      predicted_label  ...                                               text
+0                   1  ...               Es ist eine Schande, muss ich sagen.
+1                   1  ...  Wie beim Atomausstieg oder bei der massenhafte...
+2                   1  ...  Dafür machen Sie eine Energiewende, und dafür ...
+3                   1  ...  Schwerwiegender sind landespolitische Entschei...
+4                   1  ...  Sie wollen, dass die Bundeswehr im Indopazifik...
+...               ...  ...                                                ...
+1754                1  ...  Aber alle Strafverteidiger sagen, dass Ihr Vor...
+1755                1  ...  Die Geringverdiener müssen dann mit erhöhten B...
+1756                1  ...  So kann durch die Vergasung von Biomasse sogen...
+1757                1  ...  Vor allem schaffen wir ab 2021 den Soli ab, ab...
+1758                1  ...  Im Gegensatz zu den meisten Regierungen dieser...
+
+[1759 rows x 3 columns]
+Augmented with data labeled as true for anti-elitism and labeled as false for anti-eltisim
+
+============================= JOB FEEDBACK =============================
+
+NodeName=uc2n916
+Job ID: 24149842
+Cluster: uc2
+User/Group: ma_jorohr/ma_ma
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 16
+CPU Utilized: 00:16:32
+CPU Efficiency: 5.29% of 05:12:32 core-walltime
+Job Wall-clock time: 00:19:32
+Memory Utilized: 1.02 GB
+Memory Efficiency: 0.80% of 128.00 GB
