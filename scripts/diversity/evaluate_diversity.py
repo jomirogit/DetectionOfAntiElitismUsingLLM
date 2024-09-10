@@ -36,8 +36,8 @@ if __name__ == "__main__":
 
     print("\n" + "="*50 + "\n")
     
-    print("Similarity Scores for Chain-Of-Thought Data:")
-    analyzer_cot = SimilarityScore("../generated_data/csv_training_data/expanded_train_data_chain.csv")
+    print("Similarity Scores for Multi-Step Prompting Data:")
+    analyzer_cot = SimilarityScore("../generated_data/csv_training_data/expanded_train_data_msp.csv")
     analyzer_cot.analyze()
     
     print("\n" + "="*50 + "\n")
