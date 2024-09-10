@@ -52,7 +52,7 @@ def generate_multi_step_prompting_statements(definition):
     data_instances = extract_assistant_text(response3[0])
         
     # Step 4: Self-Correction
-    prompt4 = f"Ueberpruefe die folgenden anti-elitistischen Aussagen und korrigiere eventuelle falsch etikettierte Instanzen:\n{data_instances}"
+    prompt4 = f"Ersetze in diesem Text explizite Nennungen von Begriffen wie Elite durch aehnliche Woerter:\n{data_instances}"
     response4 = generator(prompt_format.format(prompt=prompt4), do_sample=True, top_p=0.95, max_length=3000)
     corrected_data_instances = extract_assistant_text(response4[0])
     
